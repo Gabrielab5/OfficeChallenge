@@ -1,74 +1,74 @@
-
-class Document{
-    constructor(EmployeeName){
-        this._EmployeeName = EmployeeName
+class Document {
+    constructor(EmployeeName) {
+        this.EmployeeName = EmployeeName;
     }
 }
 
-class Cleaner{
-    constructor(name){
-        this._name = name
+class Cleaner {
+    constructor(name) {
+        this.name = name;
     }
 
-    clean(){
-        console.log("Clean")
-    }
-}
-
-class Employee{
-    constructor(name){
-        this._name = name
-    }
-
-    work(office){
-        for(let i=0;i<10;i++)
-            office.documents(push(new Document(this._name)))
+    clean() {
+        console.log("Clean");
     }
 }
 
-class Manager{
-    constructor(employees,name){
-        this._name = name
-        this._employees = []
+class Employee {
+    constructor(name) {
+        this.name = name;
     }
 
-    hireEmployee(name){
-        this._employees.push(new Employee(name))
-    }
-    
-    askEmployeesToWork(office){
-        this._employees.forEach(employee => {
-            employee.work(office)
-        })
+    work(office) {
+        for (let i = 0; i < 10; i++) {
+            office.documents.push(new Document(this.name));
+        }
     }
 }
 
-class Office{
+class Manager {
+    constructor(name) {
+        this.name = name;
+        this.employees = [];
+    }
 
-    constructor(){
+    hireEmployee(name) {
+        this.employees.push(new Employee(name));
+    }
+
+    askEmployeesToWork(office) {
+        this.employees.forEach(employee => {
+            employee.work(office);
+        });
+    }
+}
+
+class Office {
+    constructor() {
         this.documents = [];
         this.managers = [];
         this.cleaners = [];
     }
 
-    hireCleaner(name){
-        this._cleaners.push(new Cleaner(name))
+    hireCleaner(name) {
+        this.cleaners.push(new Cleaner(name));
     }
 
-    hireManager(name){
-        this._managers.push(new Manager(name))
+    hireManager(name) {
+        this.managers.push(new Manager(name));
     }
 
-    startWorkDay(){
-        this._managers.forEach(manager => {
-            manager.askEmployeesToWork(this)
-        })
+    startWorkDay() {
+        this.managers.forEach(manager => {
+            manager.askEmployeesToWork(this);
+        });
 
-        this._cleaners.forEach(cleaner => {
-            cleaner.clean()
-        })
+        this.cleaners.forEach(cleaner => {
+            cleaner.clean();
+        });
     }
 }
+
 
 module.exports = { Document, Cleaner, Employee, Manager, Office }
 
